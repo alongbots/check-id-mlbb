@@ -10,22 +10,53 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="./css/output.css">
+  <style>
+    /* Gradient background animation */
+    .animated-gradient {
+      background: linear-gradient(270deg, #ff0055, #ff9900, #33ccff, #9900ff);
+      background-size: 800% 800%;
+      animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* Cool card hover effect */
+    .cool-card {
+      transition: all 0.3s ease;
+    }
+    .cool-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    }
+
+    /* Smooth button hover */
+    .cool-button {
+      transition: all 0.2s ease;
+    }
+    .cool-button:hover {
+      background: linear-gradient(to right, #ff0055, #ff9900);
+      color: #fff;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white">
   <main class="min-h-screen flex flex-col items-center justify-center p-4 animated-gradient">
     <div class="w-full max-w-md px-4 sm:px-0">
       <div class="mb-6 text-center fade-in" id="header">
         <div class="flex items-center justify-center mb-2">
-          <img src="./img/logo-ml.webp" class="h-20 w-32 text-white">
+          <img src="./img/logo-ml.webp" class="h-20 w-32 text-white drop-shadow-lg">
         </div>
-        <h1 class="text-2xl font-bold text-white">Check Mobile Legends Account ID</h1>
+        <h1 class="text-3xl font-extrabold text-white drop-shadow-md">Check Mobile Legends Account ID</h1>
         <p class="text-white/70 text-sm mt-1">Check your Mobile Legends account username and region using your ID</p>
       </div>
       
       <div class="fade-in fade-in-delay" id="card-container">
-        <div class="bg-white/10 backdrop-blur border border-white/20 shadow-xl rounded-lg">
+        <div class="bg-white/10 backdrop-blur border border-white/20 shadow-xl rounded-2xl cool-card">
           <div class="pb-3 pt-5 px-6">
-            <h2 class="text-lg font-medium text-white">Mobile Legends Account ID</h2>
+            <h2 class="text-lg font-semibold text-white">Mobile Legends Account ID</h2>
             <p class="text-white/70 text-sm">Enter your Mobile Legends User ID and Server ID</p>
           </div>
           
@@ -36,7 +67,7 @@
                 <input type="number"
                   id="gameId"
                   placeholder="Enter your User ID" autocomplete="off"
-                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-10 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                 />
               </div>
               
@@ -45,14 +76,14 @@
                 <input type="number"
                   id="serverId"
                   placeholder="Enter your Server ID" autocomplete="off"
-                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-10 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                 />
               </div>
               
               <button
                 type="submit"
                 id="submit-button"
-                class="w-full bg-white/15 hover:bg-white/25 text-white border-0 h-9 mt-2 transition-all duration-200 rounded-md"
+                class="w-full bg-white/15 hover:bg-white/25 text-white border-0 h-10 mt-2 rounded-lg cool-button"
               >
                 <span>Check Now!</span>
               </button>
@@ -65,7 +96,7 @@
               </div>
             </div>
             
-            <div id="result-container" class="mt-4 p-3 rounded-md bg-white/10 hidden">
+            <div id="result-container" class="mt-4 p-3 rounded-lg bg-white/10 hidden">
               <div class="flex items-center gap-2 mb-2">
                 <i data-lucide="check-circle-2" class="h-4 w-4 text-green-300"></i>
                 <h3 class="font-medium text-white text-sm">Valid Account</h3>
@@ -91,7 +122,7 @@
             </div>
           </div>
           
-          <div class="flex justify-center pt-2 pb-3 border-t border-white/10 px-6">
+          <div class="flex justify-center pt-3 pb-3 border-t border-white/10 px-6">
             <p class="text-xs text-white/50">
               © <span id="current-year"></span> ALONG MLBB ID/SERVER
             </p>
@@ -101,5 +132,9 @@
     </div>
   </main>
   <script src="./js/script.js"></script>
+  <script>
+    // Set current year dynamically
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
