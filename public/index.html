@@ -3,303 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALONG MLBB Account ID Checker</title>
-  <meta name="description" content="Verify Username and Region using your Mobile Legends User ID and Server ID.">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
+  <title>Check Mobile Legends Account ID</title>
+  <meta name="description" content="Check Mobile Legends account username and region using ID">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Custom Tailwind Configuration -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            // MLBB-inspired custom colors
-            'ml-blue': '#0099FF',
-            'ml-dark': '#1A1A2E',
-            'ml-card': 'rgba(255, 255, 255, 0.08)',
-          }
-        }
-      }
-    }
-  </script>
-  
-  <style>
-    /* Custom styles for gradient background and animations */
-    @keyframes gradient-animation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .animated-gradient {
-      /* A dark, high-contrast gaming theme background */
-      background: linear-gradient(-45deg, #0f0a1d, #200d3e, #0f0a1d, #3c005b);
-      background-size: 400% 400%;
-      animation: gradient-animation 15s ease infinite;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      animation: fadeIn 0.8s ease-out forwards;
-    }
-    .fade-in-delay {
-      animation-delay: 0.2s;
-    }
-  </style>
+  <link rel="stylesheet" href="./css/output.css">
 </head>
-
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white">
   <main class="min-h-screen flex flex-col items-center justify-center p-4 animated-gradient">
     <div class="w-full max-w-md px-4 sm:px-0">
-      
-      <!-- Header Section -->
-      <div class="mb-8 text-center fade-in" id="header">
-        <div class="flex items-center justify-center mb-4">
-          <!-- ALONG Branding -->
-          <span class="text-4xl font-extrabold text-ml-blue tracking-widest border-b-4 border-ml-blue pb-1 px-2 rounded-md shadow-lg">
-            ALONG
-          </span>
+      <div class="mb-6 text-center fade-in" id="header">
+        <div class="flex items-center justify-center mb-2">
+          <img src="./img/logo-ml.webp" class="h-20 w-32 text-white">
         </div>
-        <h1 class="text-3xl font-bold text-white mb-2">MLBB ID/User Checker</h1>
-        <p class="text-white/70 text-base">Verify Username and Region using your User ID and Server ID.</p>
+        <h1 class="text-2xl font-bold text-white">Check Mobile Legends Account ID</h1>
+        <p class="text-white/70 text-sm mt-1">Check your Mobile Legends account username and region using your ID</p>
       </div>
       
-      <!-- Card Container -->
       <div class="fade-in fade-in-delay" id="card-container">
-        <div class="bg-ml-card backdrop-blur-sm border border-white/10 shadow-2xl rounded-xl">
-          
-          <div class="p-6">
-            <h2 class="text-xl font-semibold text-white">Account Details</h2>
-            <p class="text-white/70 text-sm mt-1">Please enter the Mobile Legends User ID and Server ID.</p>
+        <div class="bg-white/10 backdrop-blur border border-white/20 shadow-xl rounded-lg">
+          <div class="pb-3 pt-5 px-6">
+            <h2 class="text-lg font-medium text-white">Mobile Legends Account ID</h2>
+            <p class="text-white/70 text-sm">Enter your Mobile Legends User ID and Server ID</p>
           </div>
           
           <div class="px-6 pb-6">
-            <form id="validation-form" class="space-y-5">
-              
-              <!-- User ID Input -->
+            <form id="validation-form" class="space-y-4">
               <div class="space-y-1.5">
-                <label for="gameId" class="text-white/90 text-sm block font-medium">User ID</label>
+                <label for="gameId" class="text-white/90 text-sm block">User ID</label>
                 <input type="number"
                   id="gameId"
-                  placeholder="Enter User ID (e.g., 12345678)" autocomplete="off"
-                  class="w-full bg-ml-dark border border-ml-blue/50 text-white placeholder:text-white/40 h-11 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-ml-blue transition-colors duration-200"
+                  placeholder="Enter your User ID" autocomplete="off"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
               
-              <!-- Server ID Input -->
               <div class="space-y-1.5">
-                <label for="serverId" class="text-white/90 text-sm block font-medium">Server ID</label>
+                <label for="serverId" class="text-white/90 text-sm block">Server ID</label>
                 <input type="number"
                   id="serverId"
-                  placeholder="Enter Server ID (e.g., 2048)" autocomplete="off"
-                  class="w-full bg-ml-dark border border-ml-blue/50 text-white placeholder:text-white/40 h-11 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-ml-blue transition-colors duration-200"
+                  placeholder="Enter your Server ID" autocomplete="off"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
                 />
               </div>
               
-              <!-- Submit Button -->
               <button
                 type="submit"
                 id="submit-button"
-                class="w-full bg-ml-blue hover:bg-blue-700 active:bg-blue-800 text-white font-bold h-11 mt-4 transition-all duration-200 rounded-lg shadow-lg shadow-ml-blue/30 hover:shadow-ml-blue/50 focus:outline-none focus:ring-2 focus:ring-ml-blue"
+                class="w-full bg-white/15 hover:bg-white/25 text-white border-0 h-9 mt-2 transition-all duration-200 rounded-md"
               >
                 <span>Check Now!</span>
               </button>
             </form>
             
-            <!-- Error Container -->
-            <div id="error-container" class="mt-5 bg-red-600/30 border border-red-500 text-white p-4 rounded-lg hidden transition-opacity duration-300">
+            <div id="error-container" class="mt-4 bg-red-500/20 border-0 text-white p-3 rounded-md hidden">
               <div class="flex items-center">
-                <i data-lucide="alert-triangle" class="h-5 w-5 text-red-400 flex-shrink-0"></i>
-                <p class="ml-3 text-sm font-medium" id="error-message"></p>
+                <i data-lucide="alert-circle" class="h-4 w-4 text-white"></i>
+                <p class="ml-2 text-sm" id="error-message"></p>
               </div>
             </div>
             
-            <!-- Result Container -->
-            <div id="result-container" class="mt-5 p-4 rounded-lg bg-green-600/30 border border-green-500 hidden transition-opacity duration-300">
-              <div class="flex items-center gap-3 mb-3 border-b border-green-500/50 pb-2">
-                <i data-lucide="shield-check" class="h-5 w-5 text-green-300 flex-shrink-0"></i>
-                <h3 class="font-bold text-white text-base">Account Verified</h3>
+            <div id="result-container" class="mt-4 p-3 rounded-md bg-white/10 hidden">
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="check-circle-2" class="h-4 w-4 text-green-300"></i>
+                <h3 class="font-medium text-white text-sm">Valid Account</h3>
               </div>
               
-              <div class="space-y-3">
-                <div class="flex items-start gap-4">
-                  <i data-lucide="user" class="h-5 w-5 text-white/70 mt-1"></i>
+              <div class="space-y-2 mt-2">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="user" class="h-4 w-4 text-white/70"></i>
                   <div>
-                    <p class="text-xs text-white/70 uppercase tracking-wider">Nickname</p>
-                    <p class="text-white text-lg font-medium" id="result-nickname"></p>
+                    <p class="text-xs text-white/70">Nickname</p>
+                    <p class="text-white text-sm" id="result-nickname"></p>
                   </div>
                 </div>
                 
-                <div class="flex items-start gap-4">
-                  <i data-lucide="globe" class="h-5 w-5 text-white/70 mt-1"></i>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="globe" class="h-4 w-4 text-white/70"></i>
                   <div>
-                    <p class="text-xs text-white/70 uppercase tracking-wider">Region / Country</p>
-                    <p class="text-white text-lg font-medium" id="result-country"></p>
+                    <p class="text-xs text-white/70">Country</p>
+                    <p class="text-white text-sm" id="result-country"></p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- Loading Indicator -->
-            <div id="loading-indicator" class="mt-5 p-4 rounded-lg bg-white/10 text-white text-center hidden">
-                <div class="flex items-center justify-center space-x-3">
-                    <svg class="animate-spin h-6 w-6 text-ml-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span class="text-sm font-medium">Checking ID... Please wait.</span>
-                </div>
-            </div>
-
           </div>
           
-          <!-- Footer -->
-          <div class="flex justify-center pt-4 pb-3 border-t border-white/10 px-6">
+          <div class="flex justify-center pt-2 pb-3 border-t border-white/10 px-6">
             <p class="text-xs text-white/50">
-              © <span id="current-year"></span> ALONG
+              © <span id="current-year"></span> ALONG MLBB ID/SERVER
             </p>
           </div>
         </div>
       </div>
     </div>
   </main>
-
-<script>
-  // Initialize Lucide Icons
-  lucide.createIcons();
-
-  // Set current year in footer
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-
-  // --- Mock API/Validation Logic (Simulates MLBB lookup) ---
-
-  const mockUsers = [
-    { nickname: "ALONG-King", country: "Indonesia" },
-    { nickname: "ALONG-Swift", country: "Philippines" },
-    { nickname: "ALONG-MVP", country: "Vietnam" },
-    { nickname: "ALONG-Mage", country: "Thailand" },
-    { nickname: "ALONG-Fighter", country: "Malaysia" },
-    { nickname: "ALONG-Tank", country: "Singapore" },
-  ];
-
-  /**
-   * Mock function to simulate fetching MLBB account details.
-   * In a real application, this would be an AJAX request to a backend API.
-   * @param {string} gameId The Mobile Legends User ID.
-   * @param {string} serverId The Mobile Legends Server ID.
-   * @returns {Promise<{nickname: string, country: string} | {error: string}>}
-   */
-  const fetchIdDetails = (gameId, serverId) => {
-    return new Promise((resolve) => {
-      // Simulate network delay for a real API call
-      setTimeout(() => {
-        const gameIdNum = parseInt(gameId, 10);
-        const serverIdNum = parseInt(serverId, 10);
-        
-        // Simple client-side validation logic
-        if (gameIdNum <= 0 || isNaN(gameIdNum) || gameId.length < 5) {
-          resolve({ error: "Invalid User ID. ID must be a positive number with at least 5 digits." });
-          return;
-        } 
-        
-        if (serverIdNum <= 0 || isNaN(serverIdNum) || serverId.length < 3) {
-          resolve({ error: "Invalid Server ID. Server ID must be a positive number with at least 3 digits." });
-          return;
-        } 
-
-        // Mock Success condition: determines mock user based on ID hash
-        const hash = (gameIdNum + serverIdNum) % mockUsers.length;
-        if (hash === 0) {
-             // Simulate a "not found" response randomly for realism
-             resolve({ error: "User ID " + gameId + " was not found in our database." });
-        } else {
-             // Success: Return a mock user based on the hash
-             resolve(mockUsers[hash - 1] || mockUsers[0]);
-        }
-      }, 1500); // 1.5 second delay
-    });
-  };
-
-  // --- UI Interaction Logic ---
-
-  const form = document.getElementById('validation-form');
-  const gameIdInput = document.getElementById('gameId');
-  const serverIdInput = document.getElementById('serverId');
-  const submitButton = document.getElementById('submit-button');
-  const errorContainer = document.getElementById('error-container');
-  const errorMessage = document.getElementById('error-message');
-  const resultContainer = document.getElementById('result-container');
-  const resultNickname = document.getElementById('result-nickname');
-  const resultCountry = document.getElementById('result-country');
-  const loadingIndicator = document.getElementById('loading-indicator');
-
-  const hideAllMessages = () => {
-    errorContainer.classList.add('hidden');
-    resultContainer.classList.add('hidden');
-    loadingIndicator.classList.add('hidden');
-  };
-
-  const showLoading = (show) => {
-    submitButton.disabled = show;
-    // Update button text and class for loading state
-    submitButton.innerHTML = show ? 
-      '<div class="flex items-center justify-center space-x-2"><svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Checking...</span></div>' : 
-      '<span>Check Now!</span>';
-    submitButton.classList.toggle('bg-gray-500/50', show);
-    submitButton.classList.toggle('bg-ml-blue', !show);
-    loadingIndicator.classList.toggle('hidden', !show);
-  };
-
-  const displayError = (message) => {
-    hideAllMessages();
-    errorMessage.textContent = message;
-    errorContainer.classList.remove('hidden');
-  };
-
-  const displayResult = (nickname, country) => {
-    hideAllMessages();
-    resultNickname.textContent = nickname;
-    resultCountry.textContent = country;
-    resultContainer.classList.remove('hidden');
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    hideAllMessages();
-
-    const gameId = gameIdInput.value.trim();
-    const serverId = serverIdInput.value.trim();
-
-    if (!gameId || !serverId) {
-      displayError("Both User ID and Server ID fields are required.");
-      return;
-    }
-
-    showLoading(true);
-
-    try {
-      const result = await fetchIdDetails(gameId, serverId);
-
-      if (result.error) {
-        displayError(result.error);
-      } else {
-        displayResult(result.nickname, result.country);
-      }
-    } catch (e) {
-      console.error("An unexpected error occurred during ID check:", e);
-      displayError("An internal error occurred. Please try again.");
-    } finally {
-      showLoading(false);
-    }
-  });
-</script>
+  <script src="./js/script.js"></script>
 </body>
 </html>
