@@ -94,7 +94,7 @@
       <!-- Header -->
       <div class="mb-8 text-center">
         <div class="flex items-center justify-center mb-4">
-          <!-- Placeholder for MLBB Logo - Replaced original local image reference -->
+          <!-- Placeholder for MLBB Logo -->
           <div class="mlbb-logo-placeholder">ML</div>
         </div>
         <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-amber-300">
@@ -115,18 +115,18 @@
         
         <form id="validation-form" class="space-y-4">
           <div class="space-y-2">
-            <label for="gameId" class="text-white block font-medium">User ID</label>
+            <label for="mlbbUserId" class="text-white block font-medium">User ID</label>
             <input type="number"
-              id="gameId"
+              id="mlbbUserId"
               placeholder="Enter your User ID" autocomplete="off"
               class="w-full input-field h-12 px-4 rounded-lg focus:outline-none text-white transition duration-200"
             />
           </div>
           
           <div class="space-y-2">
-            <label for="serverId" class="text-white block font-medium">Server ID</label>
+            <label for="mlbbServerId" class="text-white block font-medium">Server ID</label>
             <input type="number"
-              id="serverId"
+              id="mlbbServerId"
               placeholder="Enter your Server ID (e.g., 2043)" autocomplete="off"
               class="w-full input-field h-12 px-4 rounded-lg focus:outline-none text-white transition duration-200"
             />
@@ -194,8 +194,9 @@
     lucide.createIcons();
 
     const form = document.getElementById('validation-form');
-    const gameIdInput = document.getElementById('gameId');
-    const serverIdInput = document.getElementById('serverId');
+    // Renamed input variables to mlbbUserIdInput and mlbbServerIdInput
+    const mlbbUserIdInput = document.getElementById('mlbbUserId');
+    const mlbbServerIdInput = document.getElementById('mlbbServerId');
     const submitButton = document.getElementById('submit-button');
     const buttonText = document.getElementById('button-text');
     const loadingSpinner = document.getElementById('loading-spinner');
@@ -208,7 +209,7 @@
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Mock API Function to Simulate ID Check
+    // Mock API Function to Simulate ID Check (LOGIC REMAINS UNCHANGED)
     async function checkMLBBId(userId, serverId) {
         // Simple client-side validation
         if (!userId || !serverId || userId.length < 5 || serverId.length < 1) {
@@ -247,10 +248,11 @@
         buttonText.classList.add('hidden');
         loadingSpinner.classList.remove('hidden');
 
-        const userId = gameIdInput.value.trim();
-        const serverId = serverIdInput.value.trim();
+        // Use the renamed input variables
+        const userId = mlbbUserIdInput.value.trim();
+        const serverId = mlbbServerIdInput.value.trim();
 
-        // Perform the mock ID check
+        // Perform the mock ID check (function logic is unchanged)
         const response = await checkMLBBId(userId, serverId);
 
         // Re-enable button and hide loading state
@@ -269,8 +271,8 @@
             resultContainer.classList.remove('hidden');
             
             // Clear input fields on success
-            gameIdInput.value = '';
-            serverIdInput.value = '';
+            mlbbUserIdInput.value = '';
+            mlbbServerIdInput.value = '';
             
         } else {
             // Display error
