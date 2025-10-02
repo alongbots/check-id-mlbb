@@ -1,1 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Image</title>
+</head>
+<body>
+  <img src="https://files.catbox.moe/08ouh3.jpg" alt="Image" width="500">
+</body>
+</html>
 
