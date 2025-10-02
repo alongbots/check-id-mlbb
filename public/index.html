@@ -4,35 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALONG MLBB CHECKER</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* --- Aesthetic Variables --- */
+        /* Define the core cute/retro aesthetic colors and shadow box style */
         :root {
             --color-dark: #1a1a1a; /* Dark brown/black for text and borders */
             --color-cream: #f7f3e8; /* Light creamy beige background */
-            --color-shadow: #e0c99a; /* Creamy shadow color (light tan) */
+            --color-shadow: #e0c99a; /* Creamy shadow color */
             --color-accent: #8fa2e0; /* Soft Blue/Lavender accent */
         }
 
-        /* --- Global & Background Fading Styles --- */
+        /* Fading Background Styles */
         body {
             font-family: 'Inter', sans-serif;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-color: #3b3b3b; /* Fallback for background */
-            transition: background-image 1.5s ease-in-out; /* Smooth fade effect */
+            /* Smooth background transition (fade effect) */
+            transition: background-image 1.5s ease-in-out; 
+            /* Fallback background color */
+            background-color: #3b3b3b; 
         }
 
-        /* --- Retro Box Aesthetic (Chunky Borders & Shadow) --- */
+        /* Styling to match the retro box aesthetic */
         .retro-box {
             border: 4px solid var(--color-dark);
-            box-shadow: 8px 8px 0px var(--color-shadow);
+            box-shadow: 8px 8px 0px var(--color-shadow); /* Creamy 3D effect */
             transition: all 0.2s ease-in-out;
         }
         
@@ -40,15 +39,15 @@
             box-shadow: 10px 10px 0px var(--color-shadow);
         }
 
-        /* --- Title Style --- */
+        /* Bold Title Style */
         .chunky-title {
             font-weight: 900;
             line-height: 1.1;
             color: var(--color-dark);
-            text-shadow: 3px 3px 0px var(--color-shadow); 
+            text-shadow: 3px 3px 0px var(--color-shadow); /* Creamy offset shadow */
         }
 
-        /* --- Button Style (Mint Green/Soft Blue) --- */
+        /* Cool Button Adaptation (Cute Style) */
         .cool-button {
             background-color: #9fd3c7; /* Mint Green */
             color: var(--color-dark);
@@ -61,7 +60,7 @@
             box-shadow: 4px 4px 0px var(--color-shadow) inset;
         }
         
-        /* --- Input Field Style --- */
+        /* Input Field Style */
         .input-field {
             border: 2px solid var(--color-dark);
             background-color: white;
@@ -72,15 +71,15 @@
             outline: none;
             box-shadow: 4px 4px 0px var(--color-accent);
         }
-        
-        /* --- Result/Detail Box Style --- */
+
+        /* Result Display Style */
         .result-box {
             background-color: var(--color-cream);
             border: 2px solid var(--color-dark);
             box-shadow: 4px 4px 0px var(--color-accent);
         }
         
-        /* --- Smooth Transitions --- */
+        /* Smooth Fade In */
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
             opacity: 0;
@@ -95,14 +94,11 @@
     </style>
 </head>
 <body class="text-white">
-    <!-- Main Card Container -->
     <main class="min-h-screen flex flex-col items-center justify-center p-4">
         <div class="w-full max-w-md px-4 sm:px-0">
             
-            <!-- Header Section -->
             <div class="mb-6 text-center fade-in" id="header">
                 <div class="flex items-center justify-center mb-4">
-                    <!-- Cute Placeholder Logo/Icon -->
                     <div class="h-16 w-16 rounded-full bg-pink-300 flex items-center justify-center retro-box">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sword">
                             <path d="M20.5 2L17 5.5"/>
@@ -119,17 +115,15 @@
                 <p class="text-gray-700 text-sm mt-2">Check your Mobile Legends username and region using your ID</p>
             </div>
             
-            <!-- Card Container (Slightly opaque creamy color over the background fade) -->
             <div class="fade-in fade-in-delay" id="card-container">
                 <div class="bg-white/80 p-6 rounded-2xl retro-box backdrop-blur-sm">
                     <div class="pb-3 pt-1">
-                        <h2 class="text-xl font-bold text-gray-800">Mobile Legends Account ID</h2>
+                        <h2 class="text-xl font-bold text-gray-800">MLBB Account ID</h2>
                         <p class="text-gray-500 text-sm">Enter your User ID and Server ID to verify.</p>
                     </div>
                     
                     <div class="pb-3">
                         <form id="validation-form" class="space-y-4">
-                            <!-- User ID Input -->
                             <div class="space-y-1.5">
                                 <label for="gameId" class="text-gray-800 text-sm block font-medium">User ID</label>
                                 <input type="number"
@@ -139,7 +133,6 @@
                                 />
                             </div>
                             
-                            <!-- Server ID Input -->
                             <div class="space-y-1.5">
                                 <label for="serverId" class="text-gray-800 text-sm block font-medium">Server ID</label>
                                 <input type="number"
@@ -149,7 +142,6 @@
                                 />
                             </div>
                             
-                            <!-- Submit Button -->
                             <button
                                 type="submit"
                                 id="submit-button"
@@ -159,7 +151,6 @@
                             </button>
                         </form>
                         
-                        <!-- Error Message Container (Cute Style) -->
                         <div id="error-container" class="mt-4 p-4 rounded-xl bg-red-100 border-2 border-red-500 text-red-700 hidden retro-box" role="alert">
                             <div class="flex items-center">
                                 <i data-lucide="alert-circle" class="h-5 w-5 mr-2"></i>
@@ -167,16 +158,13 @@
                             </div>
                         </div>
                         
-                        <!-- Result Container (Cute Style) -->
                         <div id="result-container" class="mt-4 p-5 rounded-xl result-box hidden">
-                            <div class="flex items-center gap-2 mb-3 text-gray-800">
+                            <div class="flex items-center gap-2 mb-3">
                                 <i data-lucide="check-circle-2" class="h-6 w-6 text-green-500"></i>
-                                <h3 class="font-bold text-lg">Account Found!</h3>
+                                <h3 class="font-bold text-lg text-gray-800">Account Found!</h3>
                             </div>
                             
-                            <!-- Profile Image & Details -->
                             <div class="flex items-center gap-4 mb-4 pb-4 border-b border-gray-200">
-                                <!-- Profile Image Display -->
                                 <img id="result-profile-image" 
                                      src="https://placehold.co/80x80/9fd3c7/1a1a1a?text=MLBB" 
                                      class="w-16 h-16 rounded-full border-2 border-pink-400 shadow-md object-cover" 
@@ -188,7 +176,6 @@
                             </div>
 
                             <div class="space-y-4 mt-2">
-                                <!-- Nickname Detail -->
                                 <div class="p-3 bg-gray-100 rounded-lg flex items-center gap-3">
                                     <i data-lucide="user" class="h-5 w-5 text-gray-500"></i>
                                     <div>
@@ -197,7 +184,6 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Region Detail -->
                                 <div class="p-3 bg-gray-100 rounded-lg flex items-center gap-3">
                                     <i data-lucide="globe" class="h-5 w-5 text-gray-500"></i>
                                     <div>
@@ -209,7 +195,6 @@
                         </div>
                     </div>
                     
-                    <!-- Footer / All Rights -->
                     <div class="flex justify-center pt-3 border-t border-gray-200 mt-4">
                         <p class="text-xs text-gray-500">
                             © <span id="current-year"></span> ALL RIGHTS ALONG BOTS.
@@ -220,7 +205,7 @@
         </div>
     </main>
 
-    <script>
+    <script src="./js/script.js"></script> <script>
         // 1. Dynamic year update
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
@@ -237,24 +222,20 @@
             "https://files.catbox.moe/w8scwj.jpg"
         ];
         
-        // Custom Profile Image URLs for Mock Data (Cute aesthetic placeholders)
+        // Custom Backgrounds for Mock Data
         const profileImages = [
-            "https://placehold.co/80x80/e79e6f/1a1a1a?text=CHIBI-A", 
-            "https://placehold.co/80x80/a0c49d/1a1a1a?text=CHIBI-B"  
+            "https://placehold.co/80x80/e79e6f/1a1a1a?text=CHIBI-A", // Used for AestheticLancer
+            "https://placehold.co/80x80/a0c49d/1a1a1a?text=CHIBI-B"  // Used for ChibiFighter
         ];
 
         let index = 0;
-        // Start the background fade loop immediately
-        document.body.style.backgroundImage = `url('${backgrounds[index]}')`; 
-        index = (index + 1) % backgrounds.length;
-        
         setInterval(() => {
             // Set the background image URL with a smooth CSS transition defined in <style>
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
             index = (index + 1) % backgrounds.length;
         }, 3000); // Change every 3 seconds
 
-        // 4. Form Submission Logic using jQuery
+        // 4. Form Submission Logic
         $(document).ready(function() {
             const form = $('#validation-form');
             const submitButton = $('#submit-button');
@@ -266,13 +247,13 @@
             
             const resultProfileImage = $('#result-profile-image');
             const resultNickname = $('#result-nickname');
-            const resultNicknameLarge = $('#result-nickname-large'); 
+            const resultNicknameLarge = $('#result-nickname-large'); // The large display name
             const resultCountry = $('#result-country');
 
-            // --- Mock API Fetch Function ---
+            // --- Mock API Fetch Function (Updated with Profile Image) ---
             const fetchMLBBInfo = (gameId, serverId) => {
                 return new Promise((resolve, reject) => {
-                    // Simulate network latency for a smooth transition (1.2 seconds)
+                    // Simulate network latency for a smooth transition
                     setTimeout(() => {
                         const id = gameId.trim();
                         const server = serverId.trim();
@@ -293,13 +274,12 @@
                             resolve({
                                 nickname: 'ChibiFighter',
                                 country: 'Europe (Server 5678)',
-                                profileImageUrl: profileImages[1]
                             });
                         } else {
                             // General "Not Found" message for other inputs
                             reject("MLBB account not found. Please check your IDs and try again.");
                         }
-                    }, 1200); 
+                    }, 1200); // 1.2 second delay for smooth feel
                 });
             };
 
@@ -317,11 +297,12 @@
                 try {
                     const data = await fetchMLBBInfo(gameId, serverId);
                     
-                    // Update all result fields
+                    // Update results
                     resultNickname.text(data.nickname);
                     resultNicknameLarge.text(data.nickname);
                     resultCountry.text(data.country);
-                    resultProfileImage.attr('src', data.profileImageUrl);
+                    // Use a default image if none is provided in the mock data
+                    resultProfileImage.attr('src', data.profileImageUrl || "https://placehold.co/80x80/a0c49d/1a1a1a?text=MLBB"); 
 
                     // Smoothly display results
                     resultContainer.removeClass('hidden');
