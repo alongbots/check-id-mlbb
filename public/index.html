@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Check Mobile Legends Account ID</title>
   <meta name="description" content="Check Mobile Legends account username and region using ID">
-  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="./css/output.css">
   <style>
@@ -126,12 +124,12 @@
       </div>
     </div>
   </main>
-  <script src="./js/script.js"></script>
+  
   <script>
-    // Dynamic year
+    // 1. Dynamic year update
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Background images array
+    // 2. Background images array and fading logic
     const backgrounds = [
       "https://files.catbox.moe/7wdtmc.jpg",
       "https://files.catbox.moe/cwlizu.jpg",
@@ -146,6 +144,96 @@
       document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
       index = (index + 1) % backgrounds.length;
     }, 3000); // change every 3 seconds
+    
+    // 3. Initialize Lucide Icons after DOM is loaded
+    lucide.createIcons();
+
+    // 4. Form Submission Logic (Previously in script.js)
+    $(document).ready(function() {
+        // Select all necessary elements
+        const form = $('#validation-form');
+        const submitButton = $('#submit-button');
+        const gameIdInput = $('#gameId');
+        const serverIdInput = $('#serverId');
+        const resultContainer = $('#result-container');
+        const errorContainer = $('#error-container');
+        const errorMessage = $('#error-message');
+        
+        const resultNickname = $('#result-nickname');
+        const resultCountry = $('#result-country');
+
+        // --- Mock API Fetch Function ---
+        const fetchMLBBInfo = (gameId, serverId) => {
+            return new Promise((resolve, reject) => {
+                // Simulate network latency (loading time)
+                setTimeout(() => {
+                    const id = gameId.trim();
+                    const server = serverId.trim();
+
+                    if (!id || !server) {
+                        reject("Please enter both the User ID and Server ID.");
+                        return;
+                    }
+
+                    // --- MOCK DATA FOR DEMONSTRATION ---
+                    if (id === '12345678' && server === '1234') {
+                        resolve({
+                            nickname: 'LegendaryPlayer',
+                            country: 'Southeast Asia (Server 1234)',
+                        });
+                    } else if (id === '87654321' && server === '5678') {
+                        resolve({
+                            nickname: 'GamerXyZ',
+                            country: 'Europe (Server 5678)',
+                        });
+                    } else {
+                        // General "Not Found" message for other inputs
+                        reject("Account not found. Check your IDs and try again.");
+                    }
+                }, 1200); // 1.2 second delay
+            });
+        };
+
+        // Form Submission Event Handler
+        form.on('submit', async function(e) {
+            e.preventDefault();
+
+            // Clear previous results/errors and hide containers
+            resultContainer.addClass('hidden');
+            errorContainer.addClass('hidden');
+            
+            // Disable button and show loading text
+            submitButton.prop('disabled', true).html('<span>Checking...</span>');
+            
+            const gameId = gameIdInput.val();
+            const serverId = serverIdInput.val();
+
+            try {
+                const data = await fetchMLBBInfo(gameId, serverId);
+                
+                // Update results
+                resultNickname.text(data.nickname);
+                resultCountry.text(data.country);
+
+                // Smoothly display results
+                resultContainer.removeClass('hidden');
+
+            } catch (error) {
+                // Handle error
+                errorMessage.text(error);
+                errorContainer.removeClass('hidden');
+
+            } finally {
+                // Re-enable button and reset text
+                submitButton.prop('disabled', false).html('<span>Check Now!</span>');
+                
+                // Re-create icons to ensure dynamic content icons are rendered
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                }
+            }
+        });
+    });
   </script>
 </body>
 </html>
