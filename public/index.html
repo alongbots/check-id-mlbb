@@ -11,16 +11,11 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="./css/output.css">
   <style>
-    /* Gradient background animation */
-    .animated-gradient {
-      background: linear-gradient(270deg, #ff0055, #ff9900, #33ccff, #9900ff);
-      background-size: 800% 800%;
-      animation: gradientBG 15s ease infinite;
-    }
-    @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
+    /* Smooth fade background animation */
+    body {
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
     }
 
     /* Cool card hover effect */
@@ -43,11 +38,11 @@
   </style>
 </head>
 <body class="bg-gray-900 text-white">
-  <main class="min-h-screen flex flex-col items-center justify-center p-4 animated-gradient">
+  <main class="min-h-screen flex flex-col items-center justify-center p-4">
     <div class="w-full max-w-md px-4 sm:px-0">
       <div class="mb-6 text-center fade-in" id="header">
         <div class="flex items-center justify-center mb-2">
-          <img src="./img/logo-ml.webp" class="h-20 w-32 text-white drop-shadow-lg">
+          <img src="https://files.catbox.moe/08ouh3.jpg" class="h-20 w-32 rounded-md shadow-lg">
         </div>
         <h1 class="text-3xl font-extrabold text-white drop-shadow-md">Check Mobile Legends Account ID</h1>
         <p class="text-white/70 text-sm mt-1">Check your Mobile Legends account username and region using your ID</p>
@@ -133,8 +128,24 @@
   </main>
   <script src="./js/script.js"></script>
   <script>
-    // Set current year dynamically
+    // Dynamic year
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Background images array
+    const backgrounds = [
+      "https://files.catbox.moe/7wdtmc.jpg",
+      "https://files.catbox.moe/cwlizu.jpg",
+      "https://files.catbox.moe/l06sw3.jpg",
+      "https://files.catbox.moe/rdte0m.jpg",
+      "https://files.catbox.moe/verjxf.jpg",
+      "https://files.catbox.moe/w8scwj.jpg"
+    ];
+
+    let index = 0;
+    setInterval(() => {
+      document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+      index = (index + 1) % backgrounds.length;
+    }, 3000); // change every 3 seconds
   </script>
 </body>
 </html>
