@@ -3,289 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALONG MLBB ID/User Checker</title>
-  <meta name="description" content="Verify Mobile Legends username and region using User ID and Server ID.">
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Cek ID Akun Mobile Legends</title>
+  <meta name="description" content="Cek Username dan Region Akun Mobile Legends lewat ID">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    /* Custom Styling for Gaming Aesthetic */
-    :root {
-      --primary-color: #5b21b6; /* Violet-700 */
-      --secondary-color: #fcd34d; /* Amber-300 */
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* Subtle Animated Background Gradient */
-    .animated-bg {
-        background: linear-gradient(-45deg, #1f2937, #111827, #1f2937);
-        background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Custom Focus State for Inputs */
-    input:focus {
-        border-color: var(--secondary-color) !important;
-        box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.5) !important;
-    }
-
-    /* Custom Button Hover Effect */
-    #submit-button {
-      transition: all 0.3s ease;
-      background-image: linear-gradient(to right, #4c1d95, #7c3aed);
-      box-shadow: 0 4px 15px rgba(91, 33, 182, 0.4);
-    }
-
-    #submit-button:hover:not(:disabled) {
-      background-image: linear-gradient(to right, #7c3aed, #4c1d95);
-      box-shadow: 0 6px 20px rgba(91, 33, 182, 0.6);
-      transform: translateY(-2px);
-    }
-    
-    #submit-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    /* Input & Card Aesthetics */
-    .card {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(17, 24, 39, 0.7); /* Darker, slightly transparent background */
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    .input-field {
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    /* Mock MLBB Logo Placeholder (since local file references were removed) */
-    .mlbb-logo-placeholder {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #ef4444, #f97316); /* Red/Orange gradient */
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
-      text-shadow: 0 0 5px rgba(0,0,0,0.5);
-    }
-  </style>
-</head>
-<body class="animated-bg text-white min-h-screen flex items-center justify-center">
-  <main class="p-4 w-full">
-    <div class="w-full max-w-lg mx-auto">
-      
-      <!-- Header -->
-      <div class="mb-8 text-center">
-        <div class="flex items-center justify-center mb-4">
-          <!-- Placeholder for MLBB Logo -->
-          <div class="mlbb-logo-placeholder">ML</div>
-        </div>
-        <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-amber-300">
-          ALONG MLBB ID/User Checker
-        </h1>
-        <p class="text-gray-400 text-sm mt-2">
-          Verify username and server region using MLBB User ID and Server ID.
-        </p>
-      </div>
-      
-      <!-- Main Card -->
-      <div id="card-container" class="card rounded-xl p-6 space-y-6">
-        
-        <div>
-          <h2 class="text-xl font-semibold text-white">Mobile Legends Account ID</h2>
-          <p class="text-gray-400 text-sm">Enter your User ID and Server ID below.</p>
-        </div>
-        
-        <form id="validation-form" class="space-y-4">
-          <div class="space-y-2">
-            <label for="mlbbUserId" class="text-white block font-medium">User ID</label>
-            <input type="number"
-              id="mlbbUserId"
-              placeholder="Enter your User ID" autocomplete="off"
-              class="w-full input-field h-12 px-4 rounded-lg focus:outline-none text-white transition duration-200"
-            />
-          </div>
-          
-          <div class="space-y-2">
-            <label for="mlbbServerId" class="text-white block font-medium">Server ID</label>
-            <input type="number"
-              id="mlbbServerId"
-              placeholder="Enter your Server ID (e.g., 2043)" autocomplete="off"
-              class="w-full input-field h-12 px-4 rounded-lg focus:outline-none text-white transition duration-200"
-            />
-          </div>
-          
-          <button
-            type="submit"
-            id="submit-button"
-            class="w-full text-white font-bold h-12 mt-4 rounded-lg"
-          >
-            <span id="button-text">Check Now!</span>
-            <span id="loading-spinner" class="hidden">
-              <i data-lucide="loader-2" class="h-5 w-5 animate-spin mx-auto"></i>
-            </span>
-          </button>
-        </form>
-        
-        <!-- Error Container -->
-        <div id="error-container" class="mt-4 p-4 rounded-lg bg-red-900/50 border border-red-500/50 hidden">
-          <div class="flex items-center">
-            <i data-lucide="alert-triangle" class="h-5 w-5 text-red-400 flex-shrink-0"></i>
-            <p class="ml-3 text-sm text-red-300" id="error-message"></p>
-          </div>
-        </div>
-        
-        <!-- Result Container -->
-        <div id="result-container" class="mt-4 p-5 rounded-xl bg-green-900/40 border border-green-500/50 hidden">
-          <div class="flex items-center gap-3 mb-3 pb-3 border-b border-green-700/50">
-            <i data-lucide="check-circle" class="h-6 w-6 text-green-300"></i>
-            <h3 class="font-bold text-lg text-green-200">Account Valid</h3>
-          </div>
-          
-          <div class="space-y-3">
-            <div class="flex items-center gap-4">
-              <i data-lucide="user-check" class="h-5 w-5 text-gray-300 flex-shrink-0"></i>
-              <div>
-                <p class="text-xs text-gray-400 uppercase tracking-widest">Nickname</p>
-                <p class="text-white font-semibold text-base" id="result-nickname"></p>
-              </div>
-            </div>
-            
-            <div class="flex items-center gap-4">
-              <i data-lucide="globe" class="h-5 w-5 text-gray-300 flex-shrink-0"></i>
-              <div>
-                <p class="text-xs text-gray-400 uppercase tracking-widest">Region</p>
-                <p class="text-white font-semibold text-base" id="result-country"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Footer -->
-      <div class="flex justify-center pt-6">
-        <p class="text-sm text-gray-500">
-          © <span id="current-year"></span> ALONG
-        </p>
-      </div>
-      
-    </div>
-  </main>
-
-  <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
-
-    const form = document.getElementById('validation-form');
-    // Renamed input variables to mlbbUserIdInput and mlbbServerIdInput
-    const mlbbUserIdInput = document.getElementById('mlbbUserId');
-    const mlbbServerIdInput = document.getElementById('mlbbServerId');
-    const submitButton = document.getElementById('submit-button');
-    const buttonText = document.getElementById('button-text');
-    const loadingSpinner = document.getElementById('loading-spinner');
-    const errorContainer = document.getElementById('error-container');
-    const errorMessage = document.getElementById('error-message');
-    const resultContainer = document.getElementById('result-container');
-    const resultNickname = document.getElementById('result-nickname');
-    const resultCountry = document.getElementById('result-country');
-
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Mock API Function to Simulate ID Check (LOGIC REMAINS UNCHANGED)
-    async function checkMLBBId(userId, serverId) {
-        // Simple client-side validation
-        if (!userId || !serverId || userId.length < 5 || serverId.length < 1) {
-            return { success: false, error: "Please ensure both User ID (min 5 digits) and Server ID are entered correctly." };
-        }
-
-        // Simulate network delay for a real-world feel
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Mock response data
-        const mockData = {
-            "12345678": { nickname: "ALONG_Official", country: "Philippines" },
-            "99887766": { nickname: "LegendaryHero", country: "Singapore" },
-            "11223344": { nickname: "MobaKing", country: "Indonesia" },
-        };
-
-        // Determine mock result based on User ID
-        if (mockData[userId]) {
-            return { success: true, nickname: mockData[userId].nickname, country: mockData[userId].country };
-        } else {
-            // Simulate a failure for other IDs
-            return { success: false, error: `Account ID: ${userId} not found on Server ID: (${serverId}). Check if the ID is correct.` };
-        }
-    }
-
-    // Form Submission Handler
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Hide previous results/errors
-        errorContainer.classList.add('hidden');
-        resultContainer.classList.add('hidden');
-
-        // Disable button and show loading state
-        submitButton.disabled = true;
-        buttonText.classList.add('hidden');
-        loadingSpinner.classList.remove('hidden');
-
-        // Use the renamed input variables
-        const userId = mlbbUserIdInput.value.trim();
-        const serverId = mlbbServerIdInput.value.trim();
-
-        // Perform the mock ID check (function logic is unchanged)
-        const response = await checkMLBBId(userId, serverId);
-
-        // Re-enable button and hide loading state
-        submitButton.disabled = false;
-        buttonText.classList.remove('hidden');
-        loadingSpinner.classList.add('hidden');
-        
-        // Ensure Lucide icons are re-rendered if needed (for the spinner)
-        lucide.createIcons();
-
-
-        if (response.success) {
-            // Display success
-            resultNickname.textContent = response.nickname;
-            resultCountry.textContent = response.country;
-            resultContainer.classList.remove('hidden');
-            
-            // Clear input fields on success
-            mlbbUserIdInput.value = '';
-            mlbbServerIdInput.value = '';
-            
-        } else {
-            // Display error
-            errorMessage.textContent = response.error;
-            errorContainer.classList.remove('hidden');
-        }
-    });
-
-    // Re-render icons on load to ensure the spinner works
-    window.addEventListener('load', () => {
-        lucide.createIcons();
-    });
+  <link rel="stylesheet" href="./css/output.css">
 
   </script>
+</head>
+<body class="bg-gray-900 text-white">
+  <main class="min-h-screen flex flex-col items-center justify-center p-4 animated-gradient">
+    <div class="w-full max-w-md px-4 sm:px-0">
+      <div class="mb-6 text-center fade-in" id="header">
+        <div class="flex items-center justify-center mb-2">
+          <img src="./img/logo-ml.webp" class="h-20 w-32 text-white">
+        </div>
+        <h1 class="text-2xl font-bold text-white">Cek ID Akun Mobile Legends</h1>
+        <p class="text-white/70 text-sm mt-1">Cek Username dan Region Akun Mobile Legends lewat ID</p>
+      </div>
+      
+      <div class="fade-in fade-in-delay" id="card-container">
+        <div class="bg-white/10 backdrop-blur border border-white/20 shadow-xl rounded-lg">
+          <div class="pb-3 pt-5 px-6">
+            <h2 class="text-lg font-medium text-white">ID Akun Mobile Legends</h2>
+            <p class="text-white/70 text-sm">Masukkan User ID dan Server ID akun Mobile Legends Anda</p>
+          </div>
+          
+          <div class="px-6 pb-6">
+            <form id="validation-form" class="space-y-4">
+              <div class="space-y-1.5">
+                <label for="gameId" class="text-white/90 text-sm block">User ID</label>
+                <input type="number"
+                  id="gameId"
+                  placeholder="Masukkan User ID Anda" autocomplete="off"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+              </div>
+              
+              <div class="space-y-1.5">
+                <label for="serverId" class="text-white/90 text-sm block">Server ID</label>
+                <input type="number"
+                  id="serverId"
+                  placeholder="Masukkan Server ID Anda" autocomplete="off"
+                  class="w-full bg-white/10 border border-white/20 text-white placeholder:text-white/40 h-9 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                />
+              </div>
+              
+              <button
+                type="submit"
+                id="submit-button"
+                class="w-full bg-white/15 hover:bg-white/25 text-white border-0 h-9 mt-2 transition-all duration-200 rounded-md"
+              >
+                <span>Cek Sekarang!</span>
+              </button>
+            </form>
+            
+            <div id="error-container" class="mt-4 bg-red-500/20 border-0 text-white p-3 rounded-md hidden">
+              <div class="flex items-center">
+                <i data-lucide="alert-circle" class="h-4 w-4 text-white"></i>
+                <p class="ml-2 text-sm" id="error-message"></p>
+              </div>
+            </div>
+            
+            <div id="result-container" class="mt-4 p-3 rounded-md bg-white/10 hidden">
+              <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="check-circle-2" class="h-4 w-4 text-green-300"></i>
+                <h3 class="font-medium text-white text-sm">Akun Valid</h3>
+              </div>
+              
+              <div class="space-y-2 mt-2">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="user" class="h-4 w-4 text-white/70"></i>
+                  <div>
+                    <p class="text-xs text-white/70">Nickname</p>
+                    <p class="text-white text-sm" id="result-nickname"></p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <i data-lucide="globe" class="h-4 w-4 text-white/70"></i>
+                  <div>
+                    <p class="text-xs text-white/70">Country</p>
+                    <p class="text-white text-sm" id="result-country"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex justify-center pt-2 pb-3 border-t border-white/10 px-6">
+            <p class="text-xs text-white/50">
+              © <span id="current-year"></span> <a href="//caliph.dev">@caliphdev</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="./js/script.js"></script>
 </body>
-</html>
+                  </html>
