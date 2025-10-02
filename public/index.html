@@ -19,8 +19,10 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      transition: background-image 1.5s ease-in-out; /* Increased transition time for smoother fade */
+      transition: background-image 1.5s ease-in-out; /* Smooth fade effect */
       font-family: 'Inter', sans-serif;
+      /* Default dark background as per your request */
+      background-color: #1a1a1a; 
     }
 
     /* Cool card hover effect */
@@ -45,7 +47,7 @@
       color: #fff;
     }
     
-    /* Smooth Fade In */
+    /* Smooth Fade In for initial load */
     .fade-in {
         animation: fadeIn 0.8s ease-out forwards;
         opacity: 0;
@@ -66,7 +68,7 @@
       <!-- Header -->
       <div class="mb-6 text-center fade-in" id="header">
         <div class="flex items-center justify-center mb-2">
-          <!-- Using a simple, rounded dark/white logo for the aesthetic -->
+          <!-- Logo Placeholder -->
           <img src="https://placehold.co/80x80/222222/ffffff?text=ALONG" class="h-20 w-20 rounded-lg shadow-lg" alt="ALONG MLBB Logo">
         </div>
         <h1 class="text-3xl font-extrabold text-white drop-shadow-md mt-2">ALONG MLBB CHECKER</h1>
@@ -175,7 +177,7 @@
   
   <!-- START OF FUNCTIONS CODE (JAVASCRIPT) -->
   <script>
-    // 1. Dynamic year
+    // 1. Dynamic year update
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
     // 2. Lucide Icons Initialization
@@ -198,7 +200,7 @@
       index = (index + 1) % backgrounds.length;
     }, 3000); // change every 3 seconds
 
-    // 4. Form Submission and Mock Fetch Logic (The "Functions Code")
+    // 4. Form Submission and Mock Fetch Logic (The Core "Functions Code")
     $(document).ready(function() {
         const form = $('#validation-form');
         const submitButton = $('#submit-button');
